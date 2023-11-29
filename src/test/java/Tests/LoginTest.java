@@ -16,38 +16,41 @@ public class LoginTest {
 
     @BeforeEach
     void Setup(){
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver118.exe");
         driver= new ChromeDriver();
-        driver.manage().window().fullscreen();
+        driver.manage().window().maximize();
         mainPage= new MainPage(driver);
         loginPage= new LoginPage(driver);
         driver.get("https://www.hepsiburada.com/");
-
-        // driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
     }
 
     @Test
     void HepsiBuradaloginTest(){
         //WebDriverWait wait= new WebDriverWait(driver,Duration.ofSeconds(60L));
 
-        mainPage.ElementgozukenekadarBekle(mainPage.hesabim);
-        mainPage.clickbutton(mainPage.hesabim);
+        mainPage.ElementgozukenekadarBekle(mainPage.siparislerimxpath);
+        mainPage.clickbutton(mainPage.siparislerimxpath);
+        driver.navigate().back();
 
-        mainPage.ElementgozukenekadarBekle(mainPage.girisyap);
-        mainPage.clickbutton(mainPage.girisyap);
+        mainPage.ElementgozukenekadarBekleByid(mainPage.MyAccountid);
+        mainPage.clickbuttonbyid(mainPage.MyAccountid);
 
-        loginPage.ElementgozukenekadarBekle(loginPage.emailadres);
-        loginPage.typeInto(loginPage.emailadres,"mericbacak@gmail.com");
+        mainPage.ElementgozukenekadarBekle(mainPage.girisyapxpath);
+        mainPage.clickbutton(mainPage.girisyapxpath);
 
-        mainPage.ElementgozukenekadarBekle(loginPage.girisyapButon);
-        loginPage.clickbutton(loginPage.girisyapButon);
+        loginPage.ElementgozukenekadarBekle(loginPage.emailid);
+        loginPage.typeInto(loginPage.emailid,"mericbacak@gmail.com");
+
+        mainPage.ElementgozukenekadarBekle(loginPage.girisyapButonid);
+        loginPage.clickbutton(loginPage.girisyapButonid);
 
 
     }
     @Test
     void SearchItem(){
-        mainPage.ElementgozukenekadarBekleCss(mainPage.searchbar);
-        mainPage.typeIntoCss(mainPage.searchbar,"Bugatti");
-        mainPage.SendKeyboardButton(mainPage.searchbar, Keys.ENTER);
+        mainPage.ElementgozukenekadarBekle(mainPage.searchbarxpath) ;
+        mainPage.typeIntoxpath(mainPage.searchbarxpath,"Bugatti");
+        mainPage.SendKeyboardButton(mainPage.searchbarxpath, Keys.ENTER);
     }
 
     @AfterEach

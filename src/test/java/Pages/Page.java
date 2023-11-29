@@ -13,32 +13,33 @@ public class Page {
     public Page(WebDriver driver){
         this.driver=driver;
     }
-    public void ElementgozukenekadarBekle(String elementid){
+
+    public void ElementgozukenekadarBekle(String elementxpah){
         WebDriverWait wait= new WebDriverWait(driver, Duration.ofSeconds(60L));
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id(elementid)));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(elementxpah)));
+        System.out.println("Görüntülenen elementin texti "+ driver.findElement(By.xpath(elementxpah)).getText());
     }
 
-    public void ElementgozukenekadarBekleCss(String css){
+    public void ElementgozukenekadarBekleByid(String elementid){
         WebDriverWait wait= new WebDriverWait(driver, Duration.ofSeconds(60L));
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(css)));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(elementid)) );
     }
-    public void clickbutton(String Buttonid){
-        driver.findElement(By.id(Buttonid)).click();
+    public void clickbutton(String path){
+        driver.findElement(By.xpath(path)).click();
     }
 
-    public void clickbuttonxpath(String xpathtext){
-        WebDriverWait wait= new WebDriverWait(driver, Duration.ofSeconds(60L));
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpathtext)));
+    public void clickbuttonbyid(String id){
+        driver.findElement(By.id(id)).click();
     }
 
     public void typeInto(String elementid, String emailadres){
         driver.findElement(By.id(elementid)).sendKeys(emailadres);
     }
 
-    public void typeIntoCss(String css, String item){
-        driver.findElement(By.cssSelector(css)).sendKeys(item);
+    public void typeIntoxpath(String path, String item){
+        driver.findElement(By.xpath(path)).sendKeys(item);
     }
-    public void SendKeyboardButton(String css,Keys button){
-        driver.findElement(By.cssSelector(css)).sendKeys(button);
+    public void SendKeyboardButton(String path,Keys button){
+        driver.findElement(By.xpath(path)).sendKeys(button);
     }
 }
